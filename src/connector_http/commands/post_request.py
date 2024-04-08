@@ -12,11 +12,13 @@ class PostRequest(ConnectorCommand):
         basic_auth_username: str | None,
         basic_auth_password: str | None,
         data: dict[str, Any] | None,
+        verify: bool | None = True
     ):
         self.url = url
         self.headers = headers or {}
         self.basic_auth_username = basic_auth_username
         self.basic_auth_password = basic_auth_password
+        self.verify = verify
         self.data = data
 
     def execute(self, _config: Any, _task_data: Any) -> CommandResultDictV1:
@@ -25,7 +27,7 @@ class PostRequest(ConnectorCommand):
             auth = (self.basic_auth_username, self.basic_auth_password)
 
         try:
-            response = requests.post(self.url, headers=self.headers, auth=auth, json=self.data, timeout=300, verify=False)
+            response = requests.post(self.url, headers=self.headers, auth=auth, json=self.data, timeout=300, verify=self.verify)
 
             return {
                 "response": response.text,

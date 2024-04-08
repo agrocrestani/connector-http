@@ -14,13 +14,14 @@ class GetRequestV2(ConnectorCommand, HttpRequestBase):
         params: dict[str, str] | None = None,
         basic_auth_username: str | None = None,
         basic_auth_password: str | None = None,
+        verify: bool | None = False,
         attempts: int | None = None,
     ):
         HttpRequestBase.__init__(self, url=url,
                                  headers=headers,
                                  basic_auth_username=basic_auth_username,
                                  basic_auth_password=basic_auth_password,
-                                 verify=False)
+                                 verify=verify)
 
         self.params = params or {}
 

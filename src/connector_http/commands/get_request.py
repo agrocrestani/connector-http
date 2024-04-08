@@ -13,12 +13,14 @@ class GetRequest(ConnectorCommand):
         params: dict[str, str] | None = None,
         basic_auth_username: str | None = None,
         basic_auth_password: str | None = None,
+        verify: bool | None = False
     ):
         self.url = url
         self.headers = headers or {}
         self.params = params or {}
         self.basic_auth_username = basic_auth_username
         self.basic_auth_password = basic_auth_password
+        self.verify = verify
 
     # backend
     #   spiffworkflow-proxy
@@ -29,7 +31,7 @@ class GetRequest(ConnectorCommand):
             auth = (self.basic_auth_username, self.basic_auth_password)
 
         try:
-            response = requests.get(self.url, self.params, headers=self.headers, auth=auth, timeout=300,verify=False)
+            response = requests.get(self.url, self.params, headers=self.headers, auth=auth, timeout=300, verify=self.verify)
 
             return {
                 "response": response.text,
