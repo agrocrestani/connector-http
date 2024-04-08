@@ -16,11 +16,13 @@ class HttpRequestBase:
         headers: dict[str, str] | None = None,
         basic_auth_username: str | None = None,
         basic_auth_password: str | None = None,
+        verify: bool | None = False
     ):
         self.url = url
         self.headers = headers or {}
         self.basic_auth_username = basic_auth_username
         self.basic_auth_password = basic_auth_password
+        self.verify = verify
         self.attempts = 1
 
         self.params: dict | None = None
@@ -76,7 +78,7 @@ class HttpRequestBase:
                     "headers": self.headers,
                     "auth": auth,
                     "timeout": 300,
-                    "verify": False
+                    "verify": self.verify
                 }
                 if self.params is not None:
                     arguments["params"] = self.params
