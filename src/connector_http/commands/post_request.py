@@ -12,7 +12,7 @@ class PostRequest(ConnectorCommand):
         basic_auth_username: str | None,
         basic_auth_password: str | None,
         data: dict[str, Any] | None,
-        verify: bool | None = True
+        verify: bool | None = False
     ):
         self.url = url
         self.headers = headers or {}
