@@ -19,7 +19,8 @@ class GetRequestV2(ConnectorCommand, HttpRequestBase):
         HttpRequestBase.__init__(self, url=url,
                                  headers=headers,
                                  basic_auth_username=basic_auth_username,
-                                 basic_auth_password=basic_auth_password)
+                                 basic_auth_password=basic_auth_password,
+                                 verify=False)
 
         self.params = params or {}
 

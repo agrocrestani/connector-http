@@ -17,7 +17,7 @@ class PostRequestV2(ConnectorCommand, HttpRequestBase):
         basic_auth_password: str | None = None,
     ):
         HttpRequestBase.__init__(
-            self, url=url, headers=headers, basic_auth_username=basic_auth_username, basic_auth_password=basic_auth_password
+            self, url=url, headers=headers, basic_auth_username=basic_auth_username, basic_auth_password=basic_auth_password, verify=False
         )
 
         self.data = data or {}
