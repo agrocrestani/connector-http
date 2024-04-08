@@ -25,7 +25,7 @@ class PostRequest(ConnectorCommand):
             auth = (self.basic_auth_username, self.basic_auth_password)
 
         try:
-            response = requests.post(self.url, headers=self.headers, auth=auth, json=self.data, timeout=300)
+            response = requests.post(self.url, headers=self.headers, auth=auth, json=self.data, timeout=300, verify=False)
 
             return {
                 "response": response.text,
